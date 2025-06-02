@@ -27,8 +27,14 @@ php artisan key:generate
 php artisan migrate --seed
 php artisan storage:link
 ```
-
 ### 5. Menjalankan Aplikasi
+
+Bagian .env kemudian bagian APP_URL setting seperti ini
+```sh
+APP_URL=http://127.0.0.1:8000
+```
+
+### 6. Menjalankan Aplikasi
 ```sh
 php artisan serve
 ```
