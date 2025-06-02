@@ -16,4 +16,9 @@ class EditBerita extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }

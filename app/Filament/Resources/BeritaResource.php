@@ -18,11 +18,15 @@ use Filament\Forms\Components\Textarea;
 use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\SelectColumn;
+
 class BeritaResource extends Resource
 {
     protected static ?string $model = Berita::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
     public static function form(Form $form): Form
     {
@@ -49,13 +53,22 @@ class BeritaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                ImageColumn::make('gambar'),
+                TextColumn::make(name: 'judul'),
+                SelectColumn::make('kategori_id')
+                ->options(function () {
+                    return categories::pluck('nama', 'id')->toArray();
+                })
+                ->label("Kategori")
+                ->disabled(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
